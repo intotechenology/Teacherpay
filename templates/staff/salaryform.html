@@ -1,0 +1,79 @@
+{% extends 'dashboard/base.html' %} {% include 'partials/navbar.html' %}
+<br />
+{% block content %}
+<form method="post" class="mt-4">
+  {% csrf_token %} {% for teacher in teachers %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ teacher.admin }}</h5>
+      <p class="card-text">Total Salary: {{ teacher.salary }}</p>
+      <div class="form-group row">
+        <label
+          for="basic_salary_{{ teacher.id }}"
+          class="col-sm-3 col-form-label"
+          >Basic Salary:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="basic_salary_{{ teacher.id }}"
+            name="basic_salary_{{ teacher.id }}"
+            value="{{ teacher.basic_salary }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="rate_per_hour_{{ teacher.id }}"
+          class="col-sm-3 col-form-label"
+          >Rate per Hour:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="rate_per_hour_{{ teacher.id }}"
+            name="rate_per_hour_{{ teacher.id }}"
+            value="{{ teacher.rate_per_hour }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="bonus_{{ teacher.id }}" class="col-sm-3 col-form-label"
+          >Bonus:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="bonus_{{ teacher.id }}"
+            name="bonus_{{ teacher.id }}"
+            value="{{ teacher.bonus|default:'' }}"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="deduction_{{ teacher.id }}" class="col-sm-3 col-form-label"
+          >Deduction:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="deduction_{{ teacher.id }}"
+            name="deduction_{{ teacher.id }}"
+            value="{{ teacher.deduction|default:'' }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="form-group row">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
